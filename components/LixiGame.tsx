@@ -7,7 +7,7 @@ import { Gift, Sparkles, Send, AlertCircle } from 'lucide-react';
 
 type ScreenState = 'loading' | 'played' | 'hook' | 'shake' | 'quiz' | 'reward' | 'form' | 'success';
 
-const SCRIPT_URL = 'LINK_CỦA_TÔI'; // Thay bằng link Google Apps Script của bạn
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyoiwiktD00u49o3KKAkcx6QsqkO8uxt4unRnQSBar8IufqG-BzJRsS08QatHQba4B1/exec'; // Thay bằng link Google Apps Script của bạn
 
 const BANKS = [
     'Vietcombank', 'Techcombank', 'MBBank', 'VPBank', 'ACB', 'BIDV', 'VietinBank', 'Agribank', 'TPBank', 'Sacombank', 'Khác'
@@ -152,10 +152,11 @@ export default function LixiGame() {
             await fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
+                redirect: 'follow',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'text/plain',
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
             });
 
             localStorage.setItem('hasPlayed', 'true');
