@@ -32,7 +32,11 @@ cd li-xi-tet-gamification
 # 2. Cài đặt thư viện
 npm install
 
-# 3. Chạy ứng dụng
+# 3. Cấu hình biến môi trường
+cp .env.example .env.local
+# Mở .env.local → dán link Google Apps Script Web App của bạn vào NEXT_PUBLIC_SCRIPT_URL
+
+# 4. Chạy ứng dụng
 npm run dev
 ```
 
@@ -70,25 +74,29 @@ npm run build && firebase deploy
 
 | Mục | Cách làm |
 |---|---|
-| **Câu hỏi quiz** | Sửa mảng `QUESTIONS` trong `app/page.tsx` (~dòng 16) |
-| **Mức thưởng** | Sửa `rewardAmount` (~dòng 138): `score >= 80 ? 10000 : 5000` |
+| **Câu hỏi quiz** | Sửa mảng `QUESTIONS` trong `components/LixiGame.tsx` (~dòng 16) |
+| **Mức thưởng** | Sửa `rewardAmount` (~dòng 136): `score >= 80 ? 10000 : 5000` |
 | **Ảnh tiền** | Thay file `public/5000.png` và `public/10000.png` |
 | **Lời chúc Tết** | Tìm phần `Chúc Mừng Năm Mới` trong screen `reward` |
-| **Google Sheets** | Xem `.env.example` để kết nối lưu thông tin người nhận |
+| **Google Sheets** | Tạo `.env.local` từ `.env.example`, dán link Google Apps Script |
 
 ### 📁 Cấu Trúc Thư Mục
 
 ```
 lì-xì-tết-gamification/
 ├── app/
-│   ├── page.tsx          ← Mã nguồn chính (giao diện + logic)
-│   ├── layout.tsx        ← Bố cục trang
+│   ├── page.tsx          ← Wrapper (dynamic import, không SSR)
+│   ├── layout.tsx        ← Bố cục trang + metadata
 │   └── globals.css       ← CSS toàn cục
+├── components/
+│   └── LixiGame.tsx      ← Toàn bộ game logic (client-only)
 ├── public/
 │   ├── 5000.png          ← Ảnh tờ 5.000đ
 │   ├── 10000.png         ← Ảnh tờ 10.000đ
 │   ├── cành mai.png      ← Ảnh cành mai vàng
 │   └── bao lì xi.png    ← Ảnh bao lì xì đỏ
+├── .env.example          ← Mẫu biến môi trường
+├── .env.local            ← Link Apps Script thực tế (KHÔNG push lên Git)
 ├── package.json
 └── README.md
 ```
@@ -119,6 +127,8 @@ An interactive web gamification app where users **shake their phone** to receive
 git clone https://github.com/YOUR-NAME/li-xi-tet-gamification.git
 cd li-xi-tet-gamification
 npm install
+cp .env.example .env.local
+# Edit .env.local → paste your Google Apps Script Web App URL into NEXT_PUBLIC_SCRIPT_URL
 npm run dev
 ```
 
@@ -135,11 +145,11 @@ Open browser: **http://localhost:3000**
 
 | Item | How |
 |---|---|
-| **Quiz questions** | Edit `QUESTIONS` array in `app/page.tsx` (~line 16) |
-| **Reward amounts** | Edit `rewardAmount` (~line 138): `score >= 80 ? 10000 : 5000` |
+| **Quiz questions** | Edit `QUESTIONS` array in `components/LixiGame.tsx` (~line 16) |
+| **Reward amounts** | Edit `rewardAmount` (~line 136): `score >= 80 ? 10000 : 5000` |
 | **Money images** | Replace `public/5000.png` and `public/10000.png` |
 | **Blessing text** | Find `Chúc Mừng Năm Mới` in `reward` screen section |
-| **Google Sheets** | See `.env.example` to connect recipient data storage |
+| **Google Sheets** | Create `.env.local` from `.env.example`, paste your Apps Script URL |
 
 ---
 
@@ -167,6 +177,8 @@ Open browser: **http://localhost:3000**
 git clone https://github.com/YOUR-NAME/li-xi-tet-gamification.git
 cd li-xi-tet-gamification
 npm install
+cp .env.example .env.local
+# .env.localを編集 → NEXT_PUBLIC_SCRIPT_URLにGoogle Apps Script Web App URLを貼り付け
 npm run dev
 ```
 
@@ -183,11 +195,11 @@ npm run dev
 
 | 項目 | 方法 |
 |---|---|
-| **クイズの質問** | `app/page.tsx`の`QUESTIONS`配列を編集（〜16行目） |
-| **報酬額** | `rewardAmount`を編集（〜138行目）: `score >= 80 ? 10000 : 5000` |
+| **クイズの質問** | `components/LixiGame.tsx`の`QUESTIONS`配列を編集（〜16行目） |
+| **報酬額** | `rewardAmount`を編集（〜136行目）: `score >= 80 ? 10000 : 5000` |
 | **お金の画像** | `public/5000.png`と`public/10000.png`を差し替え |
 | **お祝いメッセージ** | `reward`画面の`Chúc Mừng Năm Mới`部分を変更 |
-| **Google Sheets** | `.env.example`を参照して受取人データの保存を設定 |
+| **Google Sheets** | `.env.example`から`.env.local`を作成、Apps Script URLを設定 |
 
 ---
 
