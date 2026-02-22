@@ -143,11 +143,10 @@ export default function LixiGame() {
         try {
             const payload = {
                 deviceId,
-                name,
-                account,
-                bank,
-                rewardAmount,
-                score
+                accountName: name,
+                accountNumber: account,
+                bankName: bank,
+                amount: rewardAmount,
             };
 
             await fetch(SCRIPT_URL, {
